@@ -1,0 +1,7 @@
+.contenedor {
+  max-width: 1600px;
+  margin-inline: auto;
+}
+.menu-active {
+  background-color: peru;
+}
