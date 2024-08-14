@@ -10,6 +10,7 @@ const routes = [
 ];
 
 const Menu = () => {
+
   return (
     <nav className="menu">
       <ul className='menu-ul'>
@@ -18,6 +19,9 @@ const Menu = () => {
             key={index}
             className={route.classItem || "menu-item"}>
             <NavLink
+              onClick={() => {
+                document.body.classList.remove('open-burger');
+              }}
               to={route.path}
               className={({ isActive }) => `${route.classLink || "menu-link"} ${isActive ? "menu-active" : ""}`}>
               {route.name}

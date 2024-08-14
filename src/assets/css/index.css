@@ -19,6 +19,7 @@ body * {
 }
 main {
   flex: 1;
+  margin-top: 5.25rem;
 }
 ul {
   list-style: none;
@@ -47,12 +48,43 @@ ul {
 .header {
   padding-block: 1rem;
   box-shadow: 0 0 1px rgba(0,0,0,.25);
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  width: 100%;
 }
 .header .contenedor {
   max-width: 1600px;
 }
+.logo > a {
+  display: block;
+  line-height: 1;
+}
 .logo img {
   max-width: 16rem;
+}
+
+.burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background-color: #024A7C;
+  border-radius: .25rem;
+  color: white;
+  cursor: pointer;
+}
+.burger span:last-child {
+  display: none;
+}
+.open-burger {
+  overflow: hidden;
+}
+.open-burger span:first-child {
+  display: none;
+}
+.open-burger span:last-child {
+  display: inline;
 }
 
 .menu-ul {
@@ -86,10 +118,21 @@ ul {
 }
 .cta.red {
   background-color: #FE2B56;
+}
+.header .cta.red {
   margin-left: 2.5rem;
 }
 .cta:hover {
   background-color: #024A7C;
+}
+
+@media (max-width: 1199px) {
+  .burger {
+    display: block;
+  }
+  .menu {
+    display: none;
+  }
 }
 
 .carousel {
@@ -231,4 +274,29 @@ ul {
 .intro p {
     font-size: clamp(1.3125rem, 1.1984rem + 0.6522vw, 1.6875rem);
     font-weight: 400;
+}
+.intro .img {
+  max-width: 400px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.menu-movil {
+  display: none;
+  background-color: white;
+  width: 100%;
+  z-index: 2;
+  height: calc(100vh - 5rem);
+  position: fixed;
+  top: 5.25rem;
+  padding-top: 3rem;
+}
+.open-burger .menu-movil,
+.open-burger .menu-movil .menu {
+  display: block;
+}
+.menu-movil .menu-ul {
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
