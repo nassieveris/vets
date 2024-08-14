@@ -19,7 +19,7 @@ body * {
 }
 main {
   flex: 1;
-  margin-top: 5.25rem;
+  margin-top: 4.5rem;
 }
 ul {
   list-style: none;
@@ -62,6 +62,11 @@ ul {
 }
 .logo img {
   max-width: 16rem;
+}
+@media (max-width: 899px) {
+  .logo img {
+    max-width: 12rem;
+  }
 }
 
 .burger {
@@ -266,6 +271,11 @@ ul {
 .group-text > *:not(:first-child) {
   margin-top: 1rem;
 }
+@media (max-width: 899px) {
+  .group-text {
+    flex: 100%;
+  }
+}
 
 .footer {
   padding-block: 1rem;
@@ -288,7 +298,7 @@ ul {
   z-index: 2;
   height: calc(100vh - 5rem);
   position: fixed;
-  top: 5.25rem;
+  top: 4.5rem;
   padding-top: 3rem;
 }
 .open-burger .menu-movil,
@@ -299,4 +309,87 @@ ul {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+}
+
+.btn {
+  background-color: green;
+  color: white;
+  border: 0;
+  padding: .25rem .5rem;
+  border-radius: 1rem;
+  font-family: Lato;
+  font-size: clamp(0.8125rem, 0.7554rem + 0.3261vw, 1rem);
+  display: flex;
+  width: 122px;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .25s background-color;
+}
+.btn:hover {
+  background-color: #024A7C;
+}
+
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0,0,0,.5);
+  top: 0;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background-color: #E6F7FD;
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  max-width: 800px;
+  border-radius: 1rem;
+  gap: 1rem;
+  color: #01497B;
+  font-weight: 400;
+}
+.modal .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #01497B;
+  font-weight: 900;
+  font-size: 30px;
+  cursor: pointer;
+}
+.modal article {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (max-width: 899px) {
+  .modal {
+    align-items: flex-start;
+  }
+  .modal-content {
+    padding: 1rem;
+  }
+  .modal article {
+    text-align: center;
+    flex-flow: column wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  .modal .img {
+    max-width: 300px;
+  }
 }
