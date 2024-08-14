@@ -95,7 +95,7 @@ ul {
 .menu-ul {
   display: flex;
   flex-flow: row wrap;
-  gap: 1rem;
+  gap: 2rem;
 }
 .menu-link {
   font-weight: 900;
@@ -369,11 +369,20 @@ ul {
   font-size: 30px;
   cursor: pointer;
 }
+.modal h4 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: clamp(1.25rem, 1.1168rem + 0.7609vw, 1.6875rem);
+  font-weight: 900;
+}
 .modal article {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   gap: 2rem;
+}
+.modal article > * {
+  flex: 1;
 }
 
 @media (max-width: 899px) {
@@ -391,5 +400,97 @@ ul {
   }
   .modal .img {
     max-width: 300px;
+  }
+}
+
+.medio {
+  min-height: 350px;
+  background-image: url(../images/medio.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.medio .contenedor {
+  margin-top: 2rem;
+  gap: .5rem;
+}
+.medio + .formulario {
+  box-shadow: 0 0 1px rgba(0,0,0,.25) inset;
+  max-width: 650px;
+  padding-block: 3rem;
+  margin-inline: auto;
+  margin-top: -200px;
+  margin-bottom: 100px;
+  background-color: white;
+  border-radius: .5rem;
+  padding-inline: 6rem;
+}
+.form-layout {
+  display: flex;
+  flex-flow: row wrap;
+  row-gap: 1rem;
+  column-gap: 2rem;
+}
+.form-item {
+  flex: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 1rem;
+}
+.form-item > label {
+  flex: .5;
+  color: #41b1f1;
+  line-height: 1;
+}
+.form-item > :not(label) {
+  flex: 1;
+  border: 1px solid #41b1f1;
+  border-radius: .25rem;
+  background-color: white;
+  padding: .5rem;
+}
+.form-half {
+  flex: 2;
+}
+.form-button {
+  background: #41b1f1;
+  border: 0;
+  padding: .5rem 2rem;
+  color: white;
+  font-weight: 900;
+  font-family: inherit;
+  font-size: 16px;
+  margin-left: auto;
+  border-radius: .25rem;
+  cursor: pointer;
+  transition: .25s background;
+}
+.form-button:hover {
+  background: #024A7C;
+}
+.form-layout hr {
+  border-top: 1px solid #41b1f1;
+  width: 100%;
+  border-bottom: 0;
+  margin-block: 1rem;
+}
+.rojo .sub-title {
+  color: #FE2B56;
+}
+.rojo .form-item > :not(label) {
+  border-color: #FE2B56;
+}
+.rojo .form-item > label {
+  color: #FE2B56;
+}
+.rojo .form-button {
+  background: #FE2B56;
+}
+.rojo .form-layout hr {
+  border-color: #FE2B56;
+}
+@media (max-width: 479px) {
+  .medio + .formulario {
+    padding-inline: 2rem;
   }
 }
