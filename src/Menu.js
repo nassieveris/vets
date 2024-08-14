@@ -1,19 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './assets/css/Menu.css';
 
 const routes = [
   { name: 'Home',                       path: '/' },
   { name: 'Nosotros',                   path: '/nosotros' },
   { name: 'Nuestros Vets',              path: '/vets' },
-  { name: '¡Toma una Consulta!',        path: '/consulta', classItem: 'menu-button', classLink: 'button-red' },
-  { name: 'Pon lindo a tu Engreído',    path: '/engrielo', classItem: 'menu-button', classLink: 'button-blue' },
+  { name: '¡Toma una Consulta!',        path: '/consulta', classItem: 'menu-button', classLink: 'cta red' },
+  { name: 'Pon lindo a tu Engreído',    path: '/engrielo', classItem: 'menu-button', classLink: 'cta cyan' },
 ];
 
 const Menu = () => {
   return (
     <nav className="menu">
-      <ul>
+      <ul className='menu-ul'>
         {routes.map((route, index) => (
           <li
             key={index}
