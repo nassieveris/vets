@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Consulta() {
+const Consulta = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [nombreProp, setNombreProp] = useState('');
   const [tipoMascota, setTipoMascota] = useState('');
