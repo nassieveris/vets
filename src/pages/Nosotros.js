@@ -9,6 +9,17 @@ const Nosotros = () => {
           <h2 className="sub-title text-center">¿Quiénes somos?</h2>
           <p className="text-center">Protejer a nuestros amigos peludos brindándoles soluciones de
           atención médica simples, flexibles y transparentes  para los dueños de mascotas de hoy.</p>
+          <figure className="video-responsive">
+            <iframe
+              width="100%"
+              height="auto"
+              src="https://www.youtube.com/embed/wNopaMuUS9Y"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
+          </figure>
         </div>
       </section>
       <section className="cyan nosotros modulo">

@@ -410,6 +410,23 @@ ul {
   }
 }
 
+.video-responsive {
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	position: relative;
+  max-width: 70%;
+  margin-left: 15%;
+}
+.video-responsive iframe {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
 .medio {
   min-height: 350px;
   background-image: url(../images/medio.jpg);
