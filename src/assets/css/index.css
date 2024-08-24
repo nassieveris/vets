@@ -329,6 +329,13 @@ ul {
 .btn:hover {
   background-color: #024A7C;
 }
+.btn.big {
+  font-size: 21px;
+  padding: .5rem 2rem;
+  border-radius: 2rem;
+  width: auto;
+  margin-top: 1rem;
+}
 
 .modal {
   position: fixed;
@@ -425,7 +432,7 @@ ul {
   padding-inline: 6rem;
 }
 .form-layout {
-  display: flex;
+  display: none;
   flex-flow: row wrap;
   row-gap: 1rem;
   column-gap: 2rem;
@@ -442,7 +449,7 @@ ul {
   color: #41b1f1;
   line-height: 1;
 }
-.form-item > :not(label) {
+.form-item > :not(label):not(div) {
   flex: 1;
   border: 1px solid #41b1f1;
   border-radius: .25rem;
@@ -493,4 +500,67 @@ ul {
   .medio + .formulario {
     padding-inline: 2rem;
   }
+}
+
+.form-layout > .form-item:first-child {
+  margin-bottom: -.5rem;
+}
+.form-radio {
+  position: relative;
+}
+input[type="radio"] {
+  position: absolute;
+  appearance: inherit;
+  top: 0;
+  z-index: 1;
+}
+input[type="radio"] + label {
+  border: 1px solid #41b1f1;
+  padding: .25rem 1rem;
+  border-radius: .5rem;
+  line-height: 1;
+  display: flex;
+  color: #41b1f1;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .25s all;
+}
+input[type="radio"]:checked + label {
+  background-color: #41b1f1;
+  color: white;
+}
+.rojo input[type="radio"] + label {
+  border-color: #FE2B56;
+  color: #FE2B56;
+}
+.rojo input[type="radio"]:checked + label {
+  background-color: #FE2B56;
+  color: white;
+}
+
+.error,
+input[type="radio"].error + label {
+  border-color: red!important;
+}
+.rojo .error,
+.rojo input[type="radio"].error + label {
+  border-color: #01497B!important;
+}
+
+.success,
+input[type="radio"].success + label {
+  border-color: green!important;
+}
+
+.gracias {
+  display: none;
+  text-align: center;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .5rem;
+}
+.show {
+  display: flex;
 }
