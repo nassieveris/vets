@@ -1,101 +1,99 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const Consulta = () => {
   const [showMessage, setShowMessage] = useState(false);
-  const [nombreProp, setNombreProp] = useState('');
-  const [tipoMascota, setTipoMascota] = useState('');
-  const [nombre, setNombre] = useState('');
+  const [formData, setFormData] = useState({});
 
-  useEffect(() => {
-    const form = document.getElementById('consultaForm');
-    const formFields = form.querySelectorAll('input, select, textarea');
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    formFields.forEach(field => {
-      field.addEventListener('input', () => {
-        const value = field.value.trim();
-        if (field.type === 'radio') {
-          const radioGroup = form.querySelectorAll(`input[name="${field.name}"]`);
-          const isChecked = Array.from(radioGroup).some(radio => radio.checked);
-          if (isChecked) {
-            radioGroup.forEach(radio => {
-              radio.dataset.state = 'valid';
-              radio.classList.add('success');
-              radio.classList.remove('error');
-            });
-          } else {
-            radioGroup.forEach(radio => {
-              radio.dataset.state = 'invalid';
-              radio.classList.add('error');
-              radio.classList.remove('success');
-            });
-          }
-        } else {
-          if (value === '') {
-            field.dataset.state = 'invalid';
-            field.classList.add('error');
-            field.classList.remove('success');
-          } else {
-            field.dataset.state = 'valid';
-            field.classList.add('success');
-            field.classList.remove('error');
-          }
-        }
-      });
+    const nombreInput = e.target.elements.nombre.value;
+    const edadInput = e.target.elements.edad.value;
+    const razaInput = e.target.elements.raza.value;
+    const tipoInput = e.target.elements.tipo.value;
+    const mailInput = e.target.elements.mail.value;
+    const direccionInput = e.target.elements.direccion.value;
+    const diaInput = e.target.elements.dia.value;
+    const horaInput = e.target.elements.hora.value;
+    const mensajeInput = e.target.elements.mensaje.value;
+    const tipoMascotaInput = e.target.elements.tipo_mascota.value;
+
+    const nombreRegex = /^[A-Za-z\s]{1,30}$/;
+    const edadRegex = /^\d{1,2}$/;
+    const razaRegex = /^[A-Za-z\s]{1,30}$/;
+    const mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const direccionRegex = /^[A-Za-z\s]{1,69}$/;
+    const diaRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    const horaRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+    if (!tipoMascotaInput) {
+      alert('Debe seleccionar un tipo de mascota.');
+      return;
+    }
+
+    if (!nombreRegex.test(nombreInput)) {
+      alert('Nombre de su Mascota debe tener entre 1 y 30 caracteres, y solo puede contener letras y espacios.');
+      return;
+    }
+
+    if (!edadRegex.test(edadInput)) {
+      alert('Edad debe ser un número de hasta 2 dígitos.');
+      return;
+    }
+
+    if (!razaRegex.test(razaInput)) {
+      alert('Raza debe tener entre 1 y 30 caracteres, y solo puede contener letras y espacios.');
+      return;
+    }
+
+    if (!tipoInput) {
+      alert('Debe seleccionar un tamaño.');
+      return;
+    }
+
+    if (!mailRegex.test(mailInput)) {
+      alert('Correo Electrónico no válido.');
+      return;
+    }
+
+    if (!direccionRegex.test(direccionInput)) {
+      alert('Dirección debe tener entre 1 y 69 caracteres, y solo puede contener letras y espacios.');
+      return;
+    }
+
+    if (!diaRegex.test(diaInput)) {
+      alert('El día debe tener el formato DD/MM/AAAA.');
+      return;
+    }
+
+    if (!horaRegex.test(horaInput)) {
+      alert('La hora debe tener el formato HH:MM.');
+      return;
+    }
+
+    if (!mensajeInput.trim()) {
+      alert('Debe ingresar un detalle de consulta.');
+      return;
+    }
+
+    setFormData({
+      nombre: nombreInput,
+      edad: edadInput,
+      raza: razaInput,
+      tipo: tipoInput,
+      mail: mailInput,
+      direccion: direccionInput,
+      dia: diaInput,
+      hora: horaInput,
+      mensaje: mensajeInput,
+      tipoMascota: tipoMascotaInput
     });
 
-    form.addEventListener('submit', (event) => {
-      let isValid = true;
-
-      formFields.forEach(field => {
-        const value = field.value.trim();
-        if (field.type === 'radio') {
-          const radioGroup = form.querySelectorAll(`input[name="${field.name}"]`);
-          const isChecked = Array.from(radioGroup).some(radio => radio.checked);
-          if (!isChecked) {
-            radioGroup.forEach(radio => {
-              radio.dataset.state = 'invalid';
-              radio.classList.add('error');
-              radio.classList.remove('success');
-            });
-            isValid = false;
-          }
-        } else {
-          if (value === '' || !field.dataset.state || field.dataset.state === 'invalid') {
-            field.dataset.state = 'invalid';
-            field.classList.add('error');
-            field.classList.remove('success');
-            isValid = false;
-          } else {
-            field.dataset.state = 'valid';
-            field.classList.add('success');
-            field.classList.remove('error');
-          }
-        }
-      });
-
-      if (!isValid) {
-        event.preventDefault();
-      } else {
-        setNombreProp(form.querySelector('#nombre_prop').value);
-        setTipoMascota(form.querySelector('input[name="tipo_mascota"]:checked').value);
-        setNombre(form.querySelector('#nombre').value);
-        setShowMessage(true);
-        event.preventDefault();
-      }
-    });
-
-    form.addEventListener('reset', () => {
-      formFields.forEach(field => {
-        field.classList.remove('error', 'success');
-        field.dataset.state = '';
-      });
-      setShowMessage(false);
-    });
-  }, []);
+    setShowMessage(true);
+  };
 
   const handleReset = () => {
-    const form = document.getElementById('consultaForm');
-    form.reset();
+    document.getElementById('engrieForm').reset();
     setShowMessage(false);
   };
 
@@ -108,68 +106,111 @@ const Consulta = () => {
         </div>
       </section>
       <section className="formulario rojo">
-      <form id="consultaForm" className={`form-layout ${showMessage ? '' : 'show'}`}>
+        <form id="engrieForm" className={`form-layout ${showMessage ? '' : 'show'}`} onSubmit={handleSubmit}>
           <div className="form-item">
             <div className='form-radio'>
-              <input type="radio" name="tipo_mascota" value="perro" id="perro" required />
-              <label htmlFor="perro">Perro</label>
+              <input type="radio" name="tipo_mascota" value="Perro" id="Perro" />
+              <label htmlFor="Perro">Perro</label>
             </div>
             <div className='form-radio'>
-              <input type="radio" name="tipo_mascota" value="gato" id="gato" required />
-              <label htmlFor="gato">Gato</label>
+              <input type="radio" name="tipo_mascota" value="Gato" id="Gato" />
+              <label htmlFor="Gato">Gato</label>
             </div>
           </div>
           <div className="form-item">
             <label htmlFor="nombre">Nombre de su Mascota:</label>
-            <input type="text" id="nombre" required />
+            <input type="text" id="nombre" name="nombre" />
           </div>
           <div className="form-item form-half">
             <label htmlFor="edad">Edad:</label>
-            <input type="number" id="edad" required />
+            <input type="number" id="edad" />
           </div>
           <div className="form-item form-half">
             <label htmlFor="raza">Raza:</label>
-            <input type="text" id="raza" required />
+            <input type="text" id="raza" />
           </div>
           <div className="form-item">
-            <label htmlFor="tipo">Tipo de Atención:</label>
+            <label htmlFor="tipo">Tamaño:</label>
             <select id="tipo">
               <option value="">Seleccione</option>
-              <option value="1">Salud y Cuidado</option>
-              <option value="2">Psicología</option>
-              <option value="3">Dieta y Nutrición</option>
-              <option value="4">Consultas Generales</option>
+              <option value="Salud y Cuidado">Salud y Cuidado</option>
+              <option value="Psicología">Psicología</option>
+              <option value="Dieta y Nutrición">Dieta y Nutrición</option>
+              <option value="Consultas Generales">Consultas Generales</option>
             </select>
-          </div>
-          <hr></hr>
-          <div className="form-item">
-            <label htmlFor="nombre_prop">Nombre del Dueño:</label>
-            <input type="text" id="nombre_prop" required />
-          </div>
-          <div className="form-item form-half">
-            <label htmlFor="fono">Fono:</label>
-            <input type="number" id="fono" required />
           </div>
           <div className="form-item form-half">
             <label htmlFor="mail">Email:</label>
-            <input type="email" id="mail" required />
+            <input type="email" id="mail" />
           </div>
           <div className="form-item">
             <label htmlFor="direccion">Dirección:</label>
-            <input type="text" id="direccion" required />
+            <input type="text" id="direccion" />
+          </div>
+          <div className="form-item form-half">
+            <label htmlFor="dia">Día:</label>
+            <input type="text" id="dia" name="dia" placeholder="DD/MM/AAAA" />
+          </div>
+          <div className="form-item form-half">
+            <label htmlFor="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" />
           </div>
           <div className="form-item">
             <label htmlFor="mensaje">Detalle de Consulta:</label>
-            <textarea id="mensaje" required></textarea>
+            <textarea id="mensaje"></textarea>
           </div>
-          <button className="form-button">Solicitar</button>
+          <button className="form-button" type="submit">Solicitar</button>
         </form>
         {showMessage && (
-        <section className="gracias show">
-          <h2>¡Muchas Gracias!</h2>
-          <p>Hola {nombreProp}, ha sido reservada una cita para su {tipoMascota} engreído, {nombre}.</p>
-          <button className='btn big' type="button" onClick={handleReset}>Volver al formulario</button>
-        </section>
+          <section className="gracias show">
+            <h2>¡Muchas Gracias!</h2>
+            <p>Aquí puede ver los detalles de su consulta</p>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Tipo de Mascota:</td>
+                  <td>{formData.tipoMascota}</td>
+                </tr>
+                <tr>
+                  <td>Nombre de su Mascota:</td>
+                  <td>{formData.nombre}</td>
+                </tr>
+                <tr>
+                  <td>Edad:</td>
+                  <td>{formData.edad}</td>
+                </tr>
+                <tr>
+                  <td>Raza:</td>
+                  <td>{formData.raza}</td>
+                </tr>
+                <tr>
+                  <td>Tipo de Consulta:</td>
+                  <td>{formData.tipo}</td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td>{formData.mail}</td>
+                </tr>
+                <tr>
+                  <td>Dirección:</td>
+                  <td>{formData.direccion}</td>
+                </tr>
+                <tr>
+                  <td>Día:</td>
+                  <td>{formData.dia}</td>
+                </tr>
+                <tr>
+                  <td>Hora:</td>
+                  <td>{formData.hora}</td>
+                </tr>
+                <tr>
+                  <td>Detalle de Consulta:</td>
+                  <td>{formData.mensaje}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button className='btn big' type="button" onClick={handleReset}>Volver al formulario</button>
+          </section>
         )}
       </section>
     </>
